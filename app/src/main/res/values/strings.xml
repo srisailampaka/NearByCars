@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NearByCarApp</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="name">Name</string>
+    <string name="vin">Vin</string>
+    <string name="interior">Interior</string>
+    <string name="fuel">Fuel</string>
+    <string name="exterior">Exterior</string>
+    <string name="engineType">EngineType</string>
+    <string name="coordinates">Coordinates</string>
+    <string name="address">Address</string>
+    <string name="network_error">Please check the network connection</string>
+    <string name="loading">Loading...</string>
+ </resources>
