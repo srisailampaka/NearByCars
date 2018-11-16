@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">NearByCarApp</string>
-    <string name="title_activity_maps">Map</string>
     <string name="name">Name</string>
     <string name="vin">Vin</string>
     <string name="interior">Interior</string>
