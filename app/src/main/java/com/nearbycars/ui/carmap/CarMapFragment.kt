@@ -6,16 +6,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nearbycars.R
-import com.nearbycars.data.model.PlaceMark
-import dagger.android.support.AndroidSupportInjection
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
-import com.nearbycars.utils.ProgressDialog
+import com.google.android.gms.maps.model.MarkerOptions
+import com.nearbycars.R
+import com.nearbycars.data.model.PlaceMark
+import com.nearbycars.ui.MainActivity
+import dagger.android.support.AndroidSupportInjection
 
 /**
  * Class for implement Google map for car location
@@ -38,14 +38,15 @@ class CarMapFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.maps_fragment, container, false)
-        ProgressDialog.showProgressDialog(this!!.context!!)
+        (activity as MainActivity).showProgressDialog()
         mapFragment = getChildFragmentManager().findFragmentById(R.id.map) as SupportMapFragment?
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as MainActivity).setBackButton(true)
+        (activity as MainActivity).setTitle(getString(R.string.carmap))
         placeMarks = arguments!!.getParcelableArrayList<PlaceMark>(CarMapFragment::class.java.name) as ArrayList<PlaceMark>
         mapFragment!!.getMapAsync(this)
 
@@ -57,7 +58,7 @@ class CarMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        ProgressDialog.dismissProgressDialog()
+        (activity as MainActivity).dismissProgressDialog()
         mMap = googleMap
         mMap?.let {
             for (i in 0 until placeMarks.size) {

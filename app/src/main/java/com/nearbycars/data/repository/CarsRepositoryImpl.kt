@@ -12,8 +12,7 @@ import io.reactivex.Single
  * @version 1.0
  * @since   2018-11-16
  */
-class CarsRepositoryImpl(private val service: CarsServices,
-                         private val context: Context) : CarsRepository {
+class CarsRepositoryImpl(private val service: CarsServices) : CarsRepository {
 
     override fun getCarList(): Single<PlaceMarkList> {
 

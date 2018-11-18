@@ -1,12 +1,16 @@
 package com.nearbycars.ui
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import com.nearbycars.R
+import com.nearbycars.utils.SimpleCountingIdlingResource
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-
 
 /**
  * Class for implement common functionalities to all the activitys
@@ -16,9 +20,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
  * @since   2018-11-16
  */
 open class BaseActivity : AppCompatActivity() {
+    lateinit var dialog: Dialog
+    var espressoTestIdlingResource = SimpleCountingIdlingResource(SimpleCountingIdlingResource::class.java.name)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dialog = Dialog(this)
     }
 
 
@@ -29,7 +36,7 @@ open class BaseActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(backStackText)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
 
@@ -41,5 +48,25 @@ open class BaseActivity : AppCompatActivity() {
     }
 
 
+    fun setBackButton(status: Boolean) {
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(status)
+    }
 
+    fun setTitle(title: String) {
+        getSupportActionBar()!!.title = title
+    }
+
+    fun showProgressDialog() {
+        val inflate = LayoutInflater.from(this).inflate(R.layout.progress_dialog, null)
+        dialog.setContentView(inflate)
+        dialog.setCancelable(true)
+        dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
+    }
+
+    fun dismissProgressDialog() {
+        dialog.cancel()
+    }
 }

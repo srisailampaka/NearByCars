@@ -2,6 +2,7 @@ package com.nearbycars.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.MenuItem
 import com.nearbycars.R
 import com.nearbycars.ui.carlist.CarListFragment
 import dagger.android.AndroidInjection
@@ -32,5 +33,16 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
             replaceTheFragment(CarListFragment.newInstance(), CarListFragment::class.java.name)
         }
 
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                supportFragmentManager.popBackStack()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

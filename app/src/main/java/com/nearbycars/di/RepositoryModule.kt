@@ -11,6 +11,5 @@ import dagger.Provides
 class RepositoryModule {
 
     @Provides
-    fun provideNewsRepo(roomsServices: CarsServices,
-                        context: Context): CarsRepository = CarsRepositoryImpl(roomsServices,  context)
+    fun provideNewsRepo(carServices: CarsServices): CarsRepository = CarsRepositoryImpl(carServices)
 }

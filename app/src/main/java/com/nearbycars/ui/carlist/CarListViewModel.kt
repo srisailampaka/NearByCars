@@ -22,14 +22,12 @@ class CarListViewModel @Inject constructor(private val repo: CarsRepository) : V
     }
 
     private fun onError(error: Throwable) {
-        //Log.e { "error ${error.localizedMessage}" }
         Log.e("",""+error.localizedMessage)
         errorData.value = error.localizedMessage
 
     }
 
     private fun onCardListReceived(placeMarksList: PlaceMarkList) {
-       // Log.d { "data received ${roomResponses.size}" }
         originalData.postValue(placeMarksList)
 
 

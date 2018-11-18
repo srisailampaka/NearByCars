@@ -1,4 +1,4 @@
-package com.nearbycars.ui.adapter
+package com.nearbycars.ui.carlist
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -10,7 +10,7 @@ import com.nearbycars.data.model.PlaceMark
 import com.nearbycars.ui.MainActivity
 import com.nearbycars.ui.carmap.CarMapFragment
 import kotlinx.android.synthetic.main.item_car.view.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Adapter class for Car list
@@ -49,7 +49,7 @@ class CarListAdapter(placeMarks: MutableList<PlaceMark>, mainActivity: MainActiv
         }
 
         //Sub layout
-        holder.container.setOnClickListener(View.OnClickListener { v ->
+        holder.container.setOnClickListener({ v ->
             val bundle = Bundle()
             bundle.putParcelableArrayList(CarMapFragment::class.java.name, ArrayList(placeMarksList))
             val carMapFragment = CarMapFragment.newInstance()
@@ -65,7 +65,7 @@ class CarListAdapter(placeMarks: MutableList<PlaceMark>, mainActivity: MainActiv
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var container = view.container
+        var container = view.item_container
         var name = view.name
         var vin = view.vin
         var interior = view.interior

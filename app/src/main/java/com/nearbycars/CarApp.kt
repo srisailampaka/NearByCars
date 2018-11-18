@@ -42,10 +42,4 @@ class CarApp : Application(), HasActivityInjector {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
-    companion object {
-        var activity: Activity? = null
-        fun setTheActivity(activityInstance: Activity) {
-            activity = activityInstance
-        }
-    }
 }
